@@ -1,0 +1,270 @@
+﻿<process name="intern project" version="1.0" bpversion="6.10.2.42081" narrative="" byrefcollection="true" preferredid="b77e4aec-ddb9-4599-bab0-a8b3a1c978c2" published="true">
+  <view>
+    <camerax>52</camerax>
+    <cameray>0.199996948</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="492a4c58-a2b4-402a-9a26-6e2aa6dd9229" name="Start" type="Start">
+    <display x="15" y="-105" />
+    <onsuccess>ddc7d4a6-2525-4175-9efa-ad55f6c014b8</onsuccess>
+  </stage>
+  <stage stageid="57bac2ab-8d6a-432a-bf8c-435d1244a055" name="End" type="End">
+    <display x="180" y="150" />
+  </stage>
+  <stage stageid="7d229151-9d53-4d76-8e1a-9b7405748d7a" name="Stage1" type="ProcessInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="ddc7d4a6-2525-4175-9efa-ad55f6c014b8" name="MS Excel VBO::Create Instance" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-45" />
+    <inputs>
+      <input type="flag" name="Enable Events" friendlyname="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" friendlyname="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="handle" />
+    </outputs>
+    <onsuccess>4153cd82-e3da-4c28-9e76-08d9e1248696</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="c6864e8f-74f3-4c05-8b2f-393f706da92f" name="handle" type="Data">
+    <display x="-75" y="-45" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="4153cd82-e3da-4c28-9e76-08d9e1248696" name="MS Excel VBO::Open Workbook" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="105" y="-45" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="File name" friendlyname="File name" narrative="The path and name of the file which should be opened." expr="&quot;C:\Users\preet\Desktop\Employee.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Workbook Name" />
+    </outputs>
+    <onsuccess>5384b969-1e30-4481-8a21-c41bc6727041</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="72ed0eeb-9b75-4f0d-a3b9-f5a5fa50a4c8" name="Workbook Name" type="Data">
+    <display x="-90" y="15" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="5384b969-1e30-4481-8a21-c41bc6727041" name="MS Excel VBO::Get Worksheet As Collection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="195" y="-45" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the worksheet which should be retrieved resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook which contains the sheet required. The default empty text indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the worksheet within the specified workbook which should be written to a collection. The default empty text indicates the currently active worksheet within the specified workbook." expr="&quot;Sheet1&quot;" />
+      <input type="text" name="Fetch Data With Method" friendlyname="Fetch Data With Method" narrative="The method used to fetch data from cells in the worksheet. Options include Text, Value, and Value2. The default indicates Value will be used." expr="" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Data" friendlyname="Data" narrative="The collection containing the data from the specified worksheet - the column IDs will be gleaned from the first row on the sheet being retrieved." stage="Employee" />
+    </outputs>
+    <onsuccess>8963b3fb-6021-45b7-a826-88b1807741fa</onsuccess>
+    <resource object="MS Excel VBO" action="Get Worksheet As Collection" />
+  </stage>
+  <stage stageid="36ad6cd5-6c76-4530-a50e-2bfcb9028d64" name="Employee" type="Collection">
+    <display x="-105" y="75" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+    <collectioninfo>
+      <field name="SAL RATE BASIC" type="number" />
+      <field name="SAL RATE DA" type="number" />
+      <field name="SAL RATE HRA" type="number" />
+      <field name="ATTEND P" type="number" />
+      <field name="ATTEND PL" type="number" />
+      <field name="ATTEND WO" type="number" />
+      <field name="ATTEND PD" type="number" />
+      <field name="GROSS BASIC" type="number" />
+      <field name="GROSS DA" type="number" />
+      <field name="GROSS HRA" type="number" />
+      <field name="INCENTIVE" type="number" />
+      <field name="TOTAL GROSS" type="number" />
+      <field name="ESI AMT" type="number" />
+      <field name="PF AMT" type="number" />
+      <field name="TOTAL SALARY" type="number" />
+      <field name="TDS" type="number" />
+      <field name="PT" type="number" />
+      <field name="TOTAL DED" type="number" />
+      <field name="NET SALARY" type="number" />
+    </collectioninfo>
+    <initialvalue>
+      <row>
+        <field name="SAL RATE BASIC" type="number" value="" />
+        <field name="SAL RATE DA" type="number" value="" />
+        <field name="SAL RATE HRA" type="number" value="" />
+        <field name="ATTEND P" type="number" value="" />
+        <field name="ATTEND PL" type="number" value="" />
+        <field name="ATTEND WO" type="number" value="" />
+        <field name="ATTEND PD" type="number" value="" />
+        <field name="GROSS BASIC" type="number" value="" />
+        <field name="GROSS DA" type="number" value="" />
+        <field name="GROSS HRA" type="number" value="" />
+        <field name="INCENTIVE" type="number" value="" />
+        <field name="TOTAL GROSS" type="number" value="" />
+        <field name="ESI AMT" type="number" value="" />
+        <field name="PF AMT" type="number" value="" />
+        <field name="TOTAL SALARY" type="number" value="" />
+        <field name="TDS" type="number" value="" />
+        <field name="PT" type="number" value="" />
+        <field name="TOTAL DED" type="number" value="" />
+        <field name="NET SALARY" type="number" value="" />
+      </row>
+      <row>
+        <field name="SAL RATE BASIC" type="number" value="" />
+        <field name="SAL RATE DA" type="number" value="" />
+        <field name="SAL RATE HRA" type="number" value="" />
+        <field name="ATTEND P" type="number" value="" />
+        <field name="ATTEND PL" type="number" value="" />
+        <field name="ATTEND WO" type="number" value="" />
+        <field name="ATTEND PD" type="number" value="" />
+        <field name="GROSS BASIC" type="number" value="" />
+        <field name="GROSS DA" type="number" value="" />
+        <field name="GROSS HRA" type="number" value="" />
+        <field name="INCENTIVE" type="number" value="" />
+        <field name="TOTAL GROSS" type="number" value="" />
+        <field name="ESI AMT" type="number" value="" />
+        <field name="PF AMT" type="number" value="" />
+        <field name="TOTAL SALARY" type="number" value="" />
+        <field name="TDS" type="number" value="" />
+        <field name="PT" type="number" value="" />
+        <field name="TOTAL DED" type="number" value="" />
+        <field name="NET SALARY" type="number" value="" />
+      </row>
+    </initialvalue>
+  </stage>
+  <stage stageid="8963b3fb-6021-45b7-a826-88b1807741fa" name="Loop Start1" type="LoopStart">
+    <loginhibit onsuccess="true" />
+    <display x="285" y="-45" />
+    <onsuccess>c0bb5ace-b05d-4f0d-90be-039abd08059f</onsuccess>
+    <groupid>1b05df90-2101-4d59-8296-069e58903758</groupid>
+    <looptype>ForEach</looptype>
+    <loopdata>Employee</loopdata>
+  </stage>
+  <stage stageid="087baacc-96ae-4dd5-b0ec-117f3f2e82c4" name="Loop End1" type="LoopEnd">
+    <loginhibit onsuccess="true" />
+    <display x="270" y="90" />
+    <onsuccess>2406309c-4160-483c-aca6-c357ed32e775</onsuccess>
+    <groupid>1b05df90-2101-4d59-8296-069e58903758</groupid>
+  </stage>
+  <stage stageid="c0bb5ace-b05d-4f0d-90be-039abd08059f" name="Multi1" type="MultipleCalculation">
+    <loginhibit onsuccess="true" />
+    <display x="360" y="-45" />
+    <onsuccess>4ca4a180-3401-478c-acd7-001b4508a3c8</onsuccess>
+    <steps>
+      <calculation expression="[Employee.SAL RATE BASIC]*0.1" stage="Employee.SAL RATE DA" />
+      <calculation expression="([Employee.SAL RATE BASIC]+[Employee.SAL RATE DA])*0.3" stage="Employee.SAL RATE HRA" />
+      <calculation expression="[Employee.SAL RATE HRA]+[Employee.SAL RATE DA]+[Employee.SAL RATE BASIC]" stage="Employee.TOTAL SALARY" />
+      <calculation expression="[Employee.ATTEND P]+[Employee.ATTEND PL]+[Employee.ATTEND WO]" stage="Employee.ATTEND PD" />
+      <calculation expression="([Employee.SAL RATE BASIC]*[Employee.ATTEND PD])/31" stage="Employee.GROSS BASIC" />
+      <calculation expression="([Employee.SAL RATE DA]*[Employee.ATTEND PD])/31" stage="Employee.GROSS DA" />
+      <calculation expression="([Employee.SAL RATE HRA]*[Employee.ATTEND PD])/31" stage="Employee.GROSS HRA" />
+      <calculation expression="[Employee.INCENTIVE]+[Employee.GROSS HRA]+[Employee.GROSS DA]+[Employee.GROSS BASIC]" stage="Employee.TOTAL GROSS" />
+      <calculation expression="[Employee.TOTAL GROSS]*0.0075" stage="Employee.ESI AMT" />
+      <calculation expression="([Employee.GROSS BASIC]+[Employee.GROSS DA])*0.12" stage="Employee.PF AMT" />
+      <calculation expression="[Employee.ESI AMT]+[Employee.PF AMT]+[Employee.TDS]+[Employee.PT]" stage="Employee.TOTAL DED" />
+      <calculation expression="[Employee.TOTAL GROSS]-[Employee.TOTAL DED]" stage="Employee.NET SALARY" />
+    </steps>
+  </stage>
+  <stage stageid="4ca4a180-3401-478c-acd7-001b4508a3c8" name="MS Excel VBO::Write Collection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="360" y="15" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the specified collection should be written. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook within which the data should be written. The default empty value indicates the current workbook within the specified instance." expr="[Workbook Name]" />
+      <input type="collection" name="Collection" friendlyname="Collection" narrative="The collection containing the data which should be written to the worksheet." expr="[Employee]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the worksheet on which the given data should be written. The default empty value indicates the current sheet within the specified workbook." expr="&quot;Sheet1&quot;" />
+      <input type="text" name="Cell Reference" friendlyname="Cell Reference" narrative="The reference at which the collection should be written." expr="&quot;A1&quot;" />
+      <input type="flag" name="Include Column Names" friendlyname="Include Column Names" narrative="True to indicate that the column names from the collection should be written out as the first row; False to ignore the column names and just write out the data." expr="True" />
+    </inputs>
+    <onsuccess>a08e9e38-ad3d-488e-8ee2-b9d73212da91</onsuccess>
+    <resource object="MS Excel VBO" action="Write Collection" />
+  </stage>
+  <stage stageid="a08e9e38-ad3d-488e-8ee2-b9d73212da91" name="MS Excel VBO::Save Workbook" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="360" y="90" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the workbook which should be saved resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook which should be saved" expr="[Workbook Name]" />
+    </inputs>
+    <onsuccess>087baacc-96ae-4dd5-b0ec-117f3f2e82c4</onsuccess>
+    <resource object="MS Excel VBO" action="Save Workbook" />
+  </stage>
+  <stage stageid="2406309c-4160-483c-aca6-c357ed32e775" name="MS Excel VBO::Close Current Workbook" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="180" y="90" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the workbook which should be closed resides. The default of zero indicates the currently active instance." expr="[handle]" />
+    </inputs>
+    <onsuccess>8442e21c-9872-4073-9aa9-9fc44ec215e3</onsuccess>
+    <resource object="MS Excel VBO" action="Close Current Workbook" />
+  </stage>
+  <stage stageid="8442e21c-9872-4073-9aa9-9fc44ec215e3" name="Email - POP3/SMTP::Configure" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="90" y="90" />
+    <inputs>
+      <input type="text" name="Username" friendlyname="Username" narrative="The POP3 and SMTP Username" expr="[Username]" />
+      <input type="password" name="Password" friendlyname="Password" narrative="The POP3 and SMTP Password" expr="[Password]" />
+      <input type="text" name="POP3 Server" friendlyname="POP3 Server" narrative="The POP3 Server address e.g. pop.domain.com" expr="&quot;pop.gmail.com&quot;" />
+      <input type="text" name="SMTP Server" friendlyname="SMTP Server" narrative="The SMTP Server address e.g. smtp.domain.com" expr="&quot;smtp.gmail.com&quot;" />
+      <input type="number" name="POP3 Port" friendlyname="POP3 Port" narrative="The POP3 Port, e.g. 110 or 995" expr="995" />
+      <input type="number" name="SMTP Port" friendlyname="SMTP Port" narrative="The SMTP Port, e.g 25 or 465" expr="587" />
+      <input type="flag" name="POP3 UseSSL" friendlyname="POP3 UseSSL" narrative="Whether to use SSL for POP3" expr="True" />
+      <input type="flag" name="SMTP UseSSL" friendlyname="SMTP UseSSL" narrative="Whether to use SSL for SMTP" expr="True" />
+    </inputs>
+    <onsuccess>91e5f9dd-e071-4f2a-bc23-706898e7f900</onsuccess>
+    <resource object="Email - POP3/SMTP" action="Configure" />
+  </stage>
+  <stage stageid="ed0e0ff3-e7f1-42d3-b6be-49310207a586" name="Username" type="Data">
+    <loginhibit onsuccess="true" />
+    <display x="-165" y="-15" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">neen9809@gmail.com</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="ee78649f-30bd-4239-9fea-f229bffcca96" name="Password" type="Data">
+    <loginhibit onsuccess="true" />
+    <display x="-180" y="30" />
+    <datatype>password</datatype>
+    <initialvalueenc>48,2,17,66,25,77,52,84,115,70</initialvalueenc>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="91e5f9dd-e071-4f2a-bc23-706898e7f900" name="Email - POP3/SMTP::Send Message" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="90" y="150" />
+    <inputs>
+      <input type="text" name="From" friendlyname="From" narrative="The email address of the sender." expr="[Username]" />
+      <input type="text" name="To" friendlyname="To" narrative="The email address of the recipient. To address multiple recipients use the format &quot;john.smith@example.com, henry.jones@example.com&quot; OR &quot;John Smith &lt;john.smith@example.com&gt;, Henry Jones &lt;henry.jones@example.com&gt;&quot;." expr="neen9809@gmail.com,reddy123haha@gmail.com,preethamreddy1011@gmail.com" />
+      <input type="text" name="Subject" friendlyname="Subject" narrative="The subject of the email." expr="&quot;HR Payroll&quot;" />
+      <input type="text" name="Body" friendlyname="Body" narrative="The body of the email." expr="&quot;Please find the details in the below attachment and acknowledge for the same&quot;" />
+      <input type="collection" name="Attachments" friendlyname="Attachments" narrative="A Collection containing a list of files to add to the email as attachments." expr="[Attachment]" />
+      <input type="flag" name="BodyIsHTML" friendlyname="BodyIsHTML" narrative="Indicates if the body should be sent as HTML" expr="" />
+    </inputs>
+    <onsuccess>57bac2ab-8d6a-432a-bf8c-435d1244a055</onsuccess>
+    <resource object="Email - POP3/SMTP" action="Send Message" />
+  </stage>
+  <stage stageid="4cc21050-9e8c-4434-b42a-b5a9725da272" name="Attachment" type="Collection">
+    <display x="-195" y="75" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+    <collectioninfo>
+      <field name="Path" type="text" description="The path to a file to include as an attachment in the email." />
+    </collectioninfo>
+    <initialvalue>
+      <row>
+        <field name="Path" type="text" value="C:\Users\preet\Desktop\Employee.xlsx" />
+      </row>
+    </initialvalue>
+  </stage>
+</process>
